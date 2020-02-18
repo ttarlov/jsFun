@@ -90,7 +90,19 @@ const clubPrompts = {
     //   ...etc
     // }
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = clubs.reduce((acc, item) => {
+
+          item.members.forEach(member => {
+
+            if(!acc[member]) {
+              acc[member] = []
+            }
+
+            acc[member].push(item.club)
+          });
+
+  return acc
+  },{})
     return result;
 
     // Annotation:
@@ -126,11 +138,11 @@ const modPrompts = {
     //   { mod: 4, studentsPerInstructor: 8 }
     // ]
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = mods.reduce((acc, mod) => {
+      acc.push({mod:mod.mod ,studentsPerInstructor:mod.students/mod.instructors});
+      return acc;
+    },[]) ;
     return result;
-
-    // Annotation:
-    // Write your annotation here as a comment
   }
 };
 
@@ -161,7 +173,12 @@ const cakePrompts = {
     //    ..etc
     // ]
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = cakes.map(cake => {
+    return {
+          flavor: cake.cakeFlavor,
+          inStock: cake.inStock
+          }
+  });
     return result;
 
     // Annotation:
@@ -189,7 +206,7 @@ const cakePrompts = {
     // ..etc
     // ]
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = cakes.filter(cake => cake.inStock > 0);
     return result;
 
     // Annotation:
@@ -200,7 +217,13 @@ const cakePrompts = {
     // Return the total amount of cakes in stock e.g.
     // 59
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = cakes.reduce((totalCakes, cake) => {
+
+      totalCakes += cake.inStock;
+
+    return totalCakes
+  },0);
+
     return result;
 
     // Annotation:
@@ -212,7 +235,17 @@ const cakePrompts = {
     // every cake in the dataset e.g.
     // ['dutch process cocoa', 'toasted sugar', 'smoked sea salt', 'berries', ..etc]
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = cakes.reduce((allToppings, cake)=> {
+
+    cake.toppings.forEach(topping => {
+
+      if(!allToppings.includes(topping)){
+        allToppings.push(topping)
+      }
+    })
+    return allToppings
+    },[])
+
     return result;
 
     // Annotation:
@@ -230,7 +263,21 @@ const cakePrompts = {
     //    ...etc
     // }
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = cakes.reduce((acc, cake) =>{
+
+      cake.toppings.forEach(topping => {
+
+        if(!acc[topping]) {
+          acc[topping] = 1
+        } else {
+          acc[topping] += 1
+        }
+
+      })
+
+    return acc
+  },{});
+
     return result;
 
     // Annotation:
@@ -265,7 +312,7 @@ const classPrompts = {
     //   { roomLetter: 'G', program: 'FE', capacity: 29 }
     // ]
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = classrooms.filter(room => room.program === "FE");
     return result;
 
     // Annotation:
