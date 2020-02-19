@@ -373,7 +373,12 @@ const bookPrompts = {
     //   'Catch-22', 'Treasure Island']
 
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = books.filter(book => {
+
+     return  book.genre !== 'Horror' && book.genre !== 'True Crime'
+    }).map(item => {
+      return item.title;
+    });
     return result;
 
     // Annotation:
@@ -388,7 +393,19 @@ const bookPrompts = {
     //  { title: 'Life of Pi', year: 2001 },
     //  { title: 'The Curious Incident of the Dog in the Night-Time', year: 2003 }]
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = books.filter(book => {
+
+    return book.published >= 1990;
+
+  }).map(newBook => {
+
+     return {
+        title: newBook.title,
+        year: newBook.published
+      }
+
+  });
+
     return result;
 
     // Annotation:
@@ -411,7 +428,11 @@ const weatherPrompts = {
     // return an array of all the average temperatures. Eg:
     // [ 40, 40, 44.5, 43.5, 57, 35, 65.5, 62, 14, 46.5 ]
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = weather.map(item => {
+
+      return (item.temperature.high + item.temperature.low) / 2
+
+  });
     return result;
 
     // Annotation:
@@ -425,7 +446,15 @@ const weatherPrompts = {
     // 'New Orleans, Louisiana is sunny.',
     // 'Raleigh, North Carolina is mostly sunny.' ]
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = weather.filter(location => {
+
+        return location.type === "sunny" || location.type === "mostly sunny"
+
+      }).map(spot => {
+
+        return `${spot.location} is ${spot.type}.`
+
+      });
     return result;
 
     // Annotation:
@@ -441,7 +470,9 @@ const weatherPrompts = {
     //   temperature: { high: 49, low: 38 }
     // }
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = weather.sort((b , a) => {
+     return a.humidity - b.humidity
+        }).shift();
     return result;
 
     // Annotation:
