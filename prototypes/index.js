@@ -518,7 +518,7 @@ const nationalParksPrompts = {
 
     // Annotation:
     // I knew there was a way to refactor with a turnery(sp?)
-    // So i tried it and with some help got it to work. 
+    // So i tried it and with some help got it to work.
   },
 
   getParkInEachState() {
@@ -531,7 +531,13 @@ const nationalParksPrompts = {
     // { Florida: 'Everglades' } ]
 
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = nationalParks.map(park => {
+
+
+       return  {[park.location]: park.name}
+
+     });
+     
     return result;
 
     // Annotation:
