@@ -537,7 +537,7 @@ const nationalParksPrompts = {
        return  {[park.location]: park.name}
 
      });
-     
+
     return result;
 
     // Annotation:
@@ -560,11 +560,24 @@ const nationalParksPrompts = {
     //   'backpacking',
     //   'rock climbing' ]
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = nationalParks.reduce((acc, park)=> {
+
+        park.activities.forEach(activity => {
+
+          // if(!acc.includes(activity)) {
+
+          // acc.push(activity)
+          // }
+
+          !acc.includes(activity) && acc.push(activity)
+        })
+
+        return acc
+      }, [])
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // Similar to the previous one i wanted to to do this on one line. 
   }
 };
 
