@@ -499,11 +499,26 @@ const nationalParksPrompts = {
     //   parksVisited: ["Rocky Mountain", "Acadia", "Zion"]
     //}
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = nationalParks.reduce((acc, park) => {
+
+  //  if(park.visited) {
+  //    acc.parksVisited.push(park.name);
+  //    } else {
+  //      acc.parksToVisit.push(park.name);
+  //    }
+
+  park.visited ? acc.parksVisited.push(park.name) : acc.parksToVisit.push(park.name)
+
+
+   return acc
+ }, {parksToVisit: [], parksVisited: [] })
+
+
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // I knew there was a way to refactor with a turnery(sp?)
+    // So i tried it and with some help got it to work. 
   },
 
   getParkInEachState() {
