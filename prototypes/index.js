@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 const { kitties } = require('./datasets/kitties');
 const { clubs } = require('./datasets/clubs');
 const { mods } = require('./datasets/mods');
@@ -577,7 +579,7 @@ const nationalParksPrompts = {
     return result;
 
     // Annotation:
-    // Similar to the previous one i wanted to to do this on one line. 
+    // Similar to the previous one i wanted to to do this on one line.
   }
 };
 
@@ -600,7 +602,15 @@ const breweryPrompts = {
     // Return the total beer count of all beers for every brewery e.g.
     // 40
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = breweries.reduce((acc, brewery) => {
+
+            acc += brewery.beers.length
+
+          // console.log(brewery.beers.length)
+
+        return acc
+      },0)
+
     return result;
 
     // Annotation:
@@ -616,7 +626,11 @@ const breweryPrompts = {
     // ...etc.
     // ]
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = breweries.map(brewery => {
+
+      return  {name: brewery.name, beerCount: brewery.beers.length}
+
+      })
     return result;
 
     // Annotation:
@@ -627,8 +641,15 @@ const breweryPrompts = {
     // Return the beer which has the highest ABV of all beers
     // e.g.
     // { name: 'Barrel Aged Nature\'s Sweater', type: 'Barley Wine', abv: 10.9, ibu: 40 }
+        let highestABVBeerPerBrewery = []
+    const result = breweries.forEach(brewery => {
+    brewery.beers.sort((a,b) => b.abv - a.abv)
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    highestABVBeerPerBrewery.push(brewery.beers[0])
+
+  })
+
+  return highestABVBeerPerBrewery.sort((a,b) => b.abv - a.abv)[0]
     return result;
 
     // Annotation:
@@ -677,6 +698,8 @@ const turingPrompts = {
     // ]
 
     const result = 'REPLACE WITH YOUR RESULT HERE';
+
+
     return result;
 
     // Annotation:
