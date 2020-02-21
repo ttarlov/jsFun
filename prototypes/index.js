@@ -722,7 +722,23 @@ const turingPrompts = {
     // cohort1804: 10.5
     // }
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = cohorts.reduce((acc, cohortInfo) => {
+
+    let counter = 0
+
+    instructors.forEach( instructor => {
+
+      if(instructor.module === cohortInfo.module) {
+        counter++
+      }
+    })
+
+
+
+    acc[`cohort${cohortInfo.cohort}`] = cohortInfo.studentCount / counter
+    return acc
+  }, {})
+  
     return result;
 
     // Annotation:
