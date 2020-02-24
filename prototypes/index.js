@@ -738,7 +738,7 @@ const turingPrompts = {
     acc[`cohort${cohortInfo.cohort}`] = cohortInfo.studentCount / counter
     return acc
   }, {})
-  
+
     return result;
 
     // Annotation:
@@ -760,7 +760,19 @@ const turingPrompts = {
     //     Will: [1, 2, 3, 4]
     //   }
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = instructors.reduce((teacherModules, instructor) => {
+    teacherModules[instructor.name] = []
+
+      cohorts.forEach(cohort => {
+
+        instructor.teaches.forEach(item => {
+         if (cohort.curriculum.includes(item) && !teacherModules[instructor.name].includes(cohort.module)) {
+           teacherModules[instructor.name].push(cohort.module)
+         }
+        })
+      })
+    return teacherModules
+  }, {});
     return result;
 
     // Annotation:
