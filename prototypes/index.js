@@ -789,7 +789,23 @@ const turingPrompts = {
     //   recursion: [ 'Pam', 'Leta' ]
     // }
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = instructors.reduce((curriculumPerTeacher, instructor) => {
+
+        cohorts.forEach(cohort => {
+
+          cohort.curriculum.forEach(skill => {
+
+              if(!curriculumPerTeacher[skill]) {
+                curriculumPerTeacher[skill] = []
+              }
+
+            if(instructor.teaches.includes(skill) && !curriculumPerTeacher[skill].includes(instructor.name)) {
+              curriculumPerTeacher[skill].push(instructor.name);
+            }
+          })
+        })
+    return curriculumPerTeacher
+  }, {})
     return result;
 
     // Annotation:
@@ -823,8 +839,23 @@ const bossPrompts = {
     //   { bossName: 'Ursula', sidekickLoyalty: 20 },
     //   { bossName: 'Scar', sidekickLoyalty: 16 }
     // ]
+    let bossKeys = Object.keys(bosses);
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = bossKeys.map(boss => {
+
+          let totalLoyalty = 0
+
+        sidekicks.forEach(sidekick => {
+
+          if(sidekick.boss === bosses[boss].name) {
+
+             totalLoyalty += sidekick.loyaltyToBoss
+          }
+        })
+
+        return {bossName:bosses[boss].name, sidekickLoyalty: totalLoyalty }
+      })
+
     return result;
 
     // Annotation:
@@ -865,8 +896,21 @@ const astronomyPrompts = {
     //     lightYearsFromEarth: 640,
     //     color: 'red' }
     // ]
+      constellationsKeys = Object.keys(constellations)
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = constellationsKeys.reduce((matchingStars, constellation ) => {
+
+    constellations[constellation].stars.forEach(constStars => {
+
+      stars.forEach(star => {
+          if(star.name === constStars) {
+            matchingStars.push(star)
+          }
+      })
+    })
+
+ return matchingStars.reverse()
+},[])
     return result;
 
     // Annotation:
@@ -884,7 +928,21 @@ const astronomyPrompts = {
     //   red: [{obj}]
     // }
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = stars.reduce((colorStars, star) => {
+
+     if(!colorStars[star.color]) {
+       colorStars[star.color] = []
+     }
+
+     if(star.color === star.color) {
+      //  colorStars[star.color].push(star)
+      colorStars[star.color].push(star)
+     }
+
+
+      return colorStars
+    },{})
+
     return result;
 
     // Annotation:
